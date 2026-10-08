@@ -12,8 +12,9 @@
             margin: 0;
             padding: 20px;
             text-align: center;
+            padding-bottom: 50px;
         }
-        h1 { font-size: 2.5rem; text-shadow: 2px 2px 0px #000; color: #f1c40f; }
+        h1 { font-size: 2.5rem; text-shadow: 2px 2px 0px #000; color: #f1c40f; margin-bottom: 30px; }
         
         .box {
             background-color: #34495e;
@@ -23,6 +24,7 @@
             max-width: 400px;
             box-shadow: 0 8px 0 #1a252f;
         }
+        h2 { margin-top: 0; margin-bottom: 15px; }
 
         /* Stile Podio */
         .podio-item {
@@ -81,6 +83,32 @@
             box-shadow: 0 5px 0 #27ae60;
         }
         .loading { font-style: italic; color: #bdc3c7; }
+
+        /* Stile Catalogo Premi */
+        .premi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .premio-card {
+            background-color: #9b59b6; /* Viola */
+            border-radius: 10px;
+            padding: 15px 10px;
+            box-shadow: 0 5px 0 #8e44ad;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .premio-card:nth-child(even) {
+            background-color: #3498db; /* Blu */
+            box-shadow: 0 5px 0 #2980b9;
+        }
+        .premio-emoji { font-size: 2.5rem; margin-bottom: 5px; }
+        .premio-titolo { font-weight: bold; font-size: 1rem; margin-bottom: 8px; line-height: 1.2; }
+        .premio-punti { background: rgba(0,0,0,0.2); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -97,8 +125,8 @@
     <!-- SEZIONE PERSONALE -->
     <div class="box">
         <h2>I Miei Punti</h2>
-        <p>Inserisci il tuo PIN segreto per vedere il tuo punteggio!</p>
-        <input type="number" id="pinInput" placeholder="PIN Segreto (es. 1234)">
+        <p style="font-size: 0.9rem;">Inserisci il tuo PIN segreto per vedere il tuo punteggio!</p>
+        <input type="number" id="pinInput" placeholder="PIN (es. 1234)">
         <button onclick="cercaPunti()">Scopri i punti!</button>
 
         <div id="risultatoPersonale">
@@ -108,9 +136,42 @@
         </div>
     </div>
 
+    <!-- SEZIONE PREMI -->
+    <div class="box">
+        <h2>🎁 I Premi</h2>
+        <p style="font-size: 0.9rem; margin-top: 0;">Ecco cosa puoi sbloccare!</p>
+        <div class="premi-grid">
+            
+            <div class="premio-card">
+                <div class="premio-emoji">🎵</div>
+                <div class="premio-titolo">Scegli tu la Musica</div>
+                <div class="premio-punti">20 pt</div>
+            </div>
+            
+            <div class="premio-card">
+                <div class="premio-emoji">🛋️</div>
+                <div class="premio-titolo">Posto VIP per una sera</div>
+                <div class="premio-punti">35 pt</div>
+            </div>
+            
+            <div class="premio-card">
+                <div class="premio-emoji">🍫</div>
+                <div class="premio-titolo">Snack o Bibita gratis</div>
+                <div class="premio-punti">50 pt</div>
+            </div>
+            
+            <div class="premio-card" style="grid-column: span 2; background-color: #e67e22; box-shadow: 0 5px 0 #d35400;">
+                <div class="premio-emoji">🍕</div>
+                <div class="premio-titolo">Premio di Gruppo: Pizzata!</div>
+                <div class="premio-punti">Tutti a 100 pt!</div>
+            </div>
+
+        </div>
+    </div>
+
     <script>
         // === INSERISCI QUI IL LINK COPIATO DA APPS SCRIPT ===
-        const API_URL = https://script.google.com/macros/s/AKfycby_Q0oUPjtt6BiOL3cE59Sr_AZhoZzeCxqSjnPQZuOnwH4mSfmZ8AovWiNZOyL1VaTw9A/exec;
+        const API_URL = "INSERISCI_QUI_IL_TUO_LINK";
 
         // Funzione per caricare il podio all'apertura del sito
         async function caricaPodio() {
