@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Punti GAM</title>
-    <!-- Importiamo un font moderno e carino da Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: #f4f7f6; /* Sfondo grigio chiarissimo/bianco */
+            background-color: #f4f7f6;
             color: #333;
             margin: 0;
             padding: 20px;
@@ -17,33 +16,23 @@
             padding-bottom: 50px;
         }
 
-        /* --- STILE LOGO E TITOLO --- */
-        .header {
-            margin-bottom: 30px;
-        }
+        .header { margin-bottom: 30px; }
         .logo {
-            width: 100px; /* Grandezza del logo */
+            width: 100px;
             height: auto;
             margin-bottom: 10px;
-            /* Se usi un logo quadrato, questo lo rende tondo. Rimuovilo se non serve */
             border-radius: 20px; 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
-        h1 { 
-            font-size: 2.2rem; 
-            color: #2c3e50; 
-            margin: 0;
-            font-weight: 800;
-        }
+        h1 { font-size: 2.2rem; color: #2c3e50; margin: 0; font-weight: 800; }
 
-        /* --- STILE DEI BOX (Schede bianche) --- */
         .box {
             background-color: #ffffff;
             border-radius: 24px;
             padding: 25px;
             margin: 20px auto;
             max-width: 420px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Ombra leggera ed elegante */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
         h2 { 
             margin-top: 0; 
@@ -54,7 +43,6 @@
             padding-bottom: 10px;
         }
 
-        /* --- STILE PODIO --- */
         .podio-item {
             display: flex;
             justify-content: space-between;
@@ -66,17 +54,13 @@
             font-size: 1.1rem;
             transition: transform 0.2s;
         }
-        .podio-item:hover {
-            transform: scale(1.02);
-        }
+        .podio-item:hover { transform: scale(1.02); }
         .medaglia { font-size: 1.5rem; margin-right: 8px; }
         
-        /* Colori delicati per il podio */
         .oro { background: #fff8e1; color: #f39c12; border: 2px solid #ffeaa7; }
         .argento { background: #f5f6fa; color: #7f8c8d; border: 2px solid #dcdde1; }
         .bronzo { background: #fdf3eb; color: #d35400; border: 2px solid #f8c291; }
 
-        /* --- STILE LOGIN E BOTTONI --- */
         input[type="number"] {
             font-family: 'Nunito', sans-serif;
             font-size: 1.2rem;
@@ -91,13 +75,11 @@
             color: #2c3e50;
             outline: none;
         }
-        input[type="number"]:focus {
-            border-color: #3498db;
-        }
+        input[type="number"]:focus { border-color: #3498db; }
         
         button {
             font-family: 'Nunito', sans-serif;
-            background-color: #ff6b6b; /* Rosso corallo vivace */
+            background-color: #ff6b6b;
             color: white;
             border: none;
             padding: 14px 30px;
@@ -114,12 +96,11 @@
             box-shadow: none;
         }
 
-        /* --- AREA PERSONALE --- */
         #risultatoPersonale {
             display: none;
             margin-top: 25px;
             font-size: 1.3rem;
-            background: #e3f2fd; /* Azzurrino chiaro */
+            background: #e3f2fd;
             color: #1976d2;
             padding: 20px;
             border-radius: 16px;
@@ -127,7 +108,6 @@
         }
         .loading { font-style: italic; color: #95a5a6; }
 
-        /* --- STILE CATALOGO PREMI --- */
         .premi-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -148,13 +128,11 @@
             transition: all 0.2s ease;
         }
         .premio-card:hover {
-            border-color: #ff6b6b; /* Diventa corallo al passaggio del mouse */
+            border-color: #ff6b6b;
             transform: translateY(-4px);
             box-shadow: 0 10px 20px rgba(255, 107, 107, 0.15);
         }
-        .premio-card:active {
-            transform: scale(0.95);
-        }
+        .premio-card:active { transform: scale(0.95); }
         
         .premio-emoji { font-size: 2.8rem; margin-bottom: 8px; }
         .premio-titolo { font-weight: 800; font-size: 0.95rem; margin-bottom: 12px; line-height: 1.2; }
@@ -168,7 +146,6 @@
             font-weight: 800; 
         }
 
-        /* Premio Speciale (Pizzata) */
         .premio-speciale {
             grid-column: span 2;
             background: #fff3e0;
@@ -182,21 +159,17 @@
 </head>
 <body>
 
-    <!-- INTESTAZIONE E LOGO -->
     <div class="header">
-        <!-- Inserisci qui l'URL della tua immagine tra le virgolette di src="" -->
         <img src="https://cdn-icons-png.flaticon.com/512/3176/3176366.png" alt="Logo GAM" class="logo">
         <h1>Punti GAM</h1>
     </div>
 
-    <!-- SEZIONE PODIO -->
     <div class="box">
         <h2>🏆 La Top 3</h2>
         <div id="loadingPodio" class="loading">Caricamento classifica...</div>
         <div id="contenitorePodio"></div>
     </div>
 
-    <!-- SEZIONE PERSONALE -->
     <div class="box">
         <h2>👤 I Miei Punti</h2>
         <p style="font-size: 0.9rem; color: #7f8c8d;">Inserisci il tuo PIN segreto per vedere il punteggio!</p>
@@ -210,41 +183,63 @@
         </div>
     </div>
 
-    <!-- SEZIONE PREMI -->
     <div class="box">
-        <h2>🎁 I Premi</h2>
-        <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0;">Clicca su un premio per sbloccarlo!</p>
+        <h2>🎁 Il Catalogo Premi</h2>
+        <p style="font-size: 0.9rem; color: #7f8c8d; margin-top: 0;">Premi ritirabili solo durante le Giornate!</p>
         <div class="premi-grid">
             
-            <div class="premio-card" onclick="compraPremio(20, 'Scegli tu la Musica')">
-                <div class="premio-emoji">🎵</div>
-                <div class="premio-titolo">Scegli tu la Musica</div>
+            <div class="premio-card" onclick="compraPremio(15, 'Adesivi (Stickers)')">
+                <div class="premio-emoji">👾</div>
+                <div class="premio-titolo">Adesivi (Stickers)</div>
+                <div class="premio-punti">15 pt</div>
+            </div>
+            
+            <div class="premio-card" onclick="compraPremio(20, 'Caramellata')">
+                <div class="premio-emoji">🍬</div>
+                <div class="premio-titolo">Caramellata</div>
                 <div class="premio-punti">20 pt</div>
             </div>
+
+            <div class="premio-card" onclick="compraPremio(30, 'Braccialetto in silicone')">
+                <div class="premio-emoji">🌈</div>
+                <div class="premio-titolo">Braccialetto in silicone</div>
+                <div class="premio-punti">30 pt</div>
+            </div>
             
-            <div class="premio-card" onclick="compraPremio(35, 'Posto VIP per una sera')">
-                <div class="premio-emoji">🛋️</div>
-                <div class="premio-titolo">Posto VIP per una sera</div>
+            <div class="premio-card" onclick="compraPremio(35, 'Spilletta da Zaino')">
+                <div class="premio-emoji">🎒</div>
+                <div class="premio-titolo">Spilletta da Zaino</div>
                 <div class="premio-punti">35 pt</div>
             </div>
-            
-            <div class="premio-card" onclick="compraPremio(50, 'Snack o Bibita gratis')">
-                <div class="premio-emoji">🍫</div>
-                <div class="premio-titolo">Snack o Bibita gratis</div>
-                <div class="premio-punti">50 pt</div>
+
+            <div class="premio-card" onclick="compraPremio(40, 'Cancelleria sfiziosa')">
+                <div class="premio-emoji">✏️</div>
+                <div class="premio-titolo">Cancelleria sfiziosa</div>
+                <div class="premio-punti">40 pt</div>
             </div>
             
-            <div class="premio-card premio-speciale" onclick="compraPremio(100, 'Premio di Gruppo: Pizzata!')">
-                <div class="premio-emoji">🍕</div>
-                <div class="premio-titolo">Premio di Gruppo: Pizzata!</div>
-                <div class="premio-punti">Tutti a 100 pt!</div>
+            <div class="premio-card" onclick="compraPremio(50, 'Mistery Box')">
+                <div class="premio-emoji">🎁</div>
+                <div class="premio-titolo">Mistery Box</div>
+                <div class="premio-punti">50 pt</div>
+            </div>
+
+            <div class="premio-card" onclick="compraPremio(60, 'Buono Gelato')">
+                <div class="premio-emoji">☕</div>
+                <div class="premio-titolo">Buono Gelato </div>
+                <div class="premio-punti">60 pt</div>
+            </div>
+
+            <div class="premio-card" onclick="compraPremio(80, 'Maxi-Formato Snack')">
+                <div class="premio-emoji">🍟</div>
+                <div class="premio-titolo">Maxi-Formato Snack</div>
+                <div class="premio-punti">80 pt</div>
             </div>
 
         </div>
     </div>
 
     <script>
-        // === ASSICURATI CHE QUI CI SIA IL TUO LINK CORRETTO ===
         const API_URL = "https://script.google.com/macros/s/AKfycbyHI71KpIZwW7fxnpYQ5a9ZRbJjmt2-jgstMhF2r3j8VYHd7AARrR-RUwaZ5sfika1J/exec";
         
         async function caricaPodio() {
@@ -306,7 +301,6 @@
             try {
                 alert("Sto verificando i tuoi punti e sbloccando il premio... ⏳\nClicca OK e attendi qualche secondo.");
                 
-                // Assicurati di aver aggiornato il file HTML precedente con questo pezzo: "&premio="
                 let url = API_URL + "?action=redeem&pin=" + pin + "&costo=" + costo + "&premio=" + encodeURIComponent(nomePremio);
                 let risposta = await fetch(url);
                 let risultato = await risposta.json();
