@@ -269,7 +269,7 @@ Ho aggiunto la funzione `compraPremio` nel blocco `<script>` e ho reso i riquadr
             try {
                 alert("Sto verificando i punti e sbloccando il premio... ⏳");
                 
-                let url = API_URL + "?action=redeem&pin=" + pin + "&costo=" + costo;
+                let url = API_URL + "?action=redeem&pin=" + pin + "&costo=" + costo + "&premio=" + encodeURIComponent(nomePremio);
                 let risposta = await fetch(url);
                 let risultato = await risposta.json();
                 
