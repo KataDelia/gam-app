@@ -18,6 +18,31 @@
         
         .box {
             background-color: #34495e;
+            Ecco il codice HTML completo e aggiornato con la funzione per sbloccare i premi. 
+
+Ho aggiunto la funzione `compraPremio` nel blocco `<script>` e ho reso i riquadri dei premi cliccabili. Sostituisci tutto il contenuto del tuo file con questo:
+
+```html
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punti GAM</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            padding-bottom: 50px;
+        }
+        h1 { font-size: 2.5rem; text-shadow: 2px 2px 0px #000; color: #f1c40f; margin-bottom: 30px; }
+        
+        .box {
+            background-color: #34495e;
             border-radius: 15px;
             padding: 20px;
             margin: 20px auto;
@@ -101,10 +126,19 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            cursor: pointer; /* Aggiunto cursore a manina */
+            transition: transform 0.1s;
+        }
+        .premio-card:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #8e44ad;
         }
         .premio-card:nth-child(even) {
             background-color: #3498db; /* Blu */
             box-shadow: 0 5px 0 #2980b9;
+        }
+        .premio-card:nth-child(even):active {
+            box-shadow: 0 2px 0 #2980b9;
         }
         .premio-emoji { font-size: 2.5rem; margin-bottom: 5px; }
         .premio-titolo { font-weight: bold; font-size: 1rem; margin-bottom: 8px; line-height: 1.2; }
@@ -139,39 +173,39 @@
     <!-- SEZIONE PREMI -->
     <div class="box">
         <h2>🎁 I Premi</h2>
-        <p style="font-size: 0.9rem; margin-top: 0;">Ecco cosa puoi sbloccare!</p>
+        <p style="font-size: 0.9rem; margin-top: 0;">Tocca un premio per sbloccarlo!</p>
         <div class="premi-grid">
             
-            <div class="premio-card">
+            <div class="premio-card" onclick="compraPremio(20, 'Scegli tu la Musica')">
                 <div class="premio-emoji">🎵</div>
                 <div class="premio-titolo">Scegli tu la Musica</div>
                 <div class="premio-punti">20 pt</div>
             </div>
             
-            <div class="premio-card">
+            <div class="premio-card" onclick="compraPremio(35, 'Posto VIP per una sera')">
                 <div class="premio-emoji">🛋️</div>
                 <div class="premio-titolo">Posto VIP per una sera</div>
                 <div class="premio-punti">35 pt</div>
             </div>
             
-            <div class="premio-card">
+            <div class="premio-card" onclick="compraPremio(50, 'Snack o Bibita gratis')">
                 <div class="premio-emoji">🍫</div>
                 <div class="premio-titolo">Snack o Bibita gratis</div>
                 <div class="premio-punti">50 pt</div>
             </div>
             
-            <div class="premio-card" style="grid-column: span 2; background-color: #e67e22; box-shadow: 0 5px 0 #d35400;">
+            <div class="premio-card" onclick="compraPremio(100, 'Premio di Gruppo: Pizzata!')" style="grid-column: span 2; background-color: #e67e22; box-shadow: 0 5px 0 #d35400;">
                 <div class="premio-emoji">🍕</div>
                 <div class="premio-titolo">Premio di Gruppo: Pizzata!</div>
-                <div class="premio-punti">Tutti a 100 pt!</div>
+                <div class="premio-punti">100 pt</div>
             </div>
 
         </div>
     </div>
 
     <script>
-// === INSERISCI QUI IL LINK COPIATO DA APPS SCRIPT ===
-const API_URL = "https://script.google.com/macros/s/AKfycbyBsARvwUIGlp0zZkOHyJy14ZOLDryevg5g5HGXS9iXmD7cjqYNWJWfS3JcLI7nXCD9/exec";
+        // Il tuo link API (assicurati che sia l'ultimo generato se hai aggiornato Apps Script)
+        const API_URL = "[https://script.google.com/macros/s/AKfycbyBsARvwUIGlp0zZkOHyJy14ZOLDryevg5g5HGXS9iXmD7cjqYNWJWfS3JcLI7nXCD9/exec](https://script.google.com/macros/s/AKfycbyBsARvwUIGlp0zZkOHyJy14ZOLDryevg5g5HGXS9iXmD7cjqYNWJWfS3JcLI7nXCD9/exec)";
         
         // Funzione per caricare il podio all'apertura del sito
         async function caricaPodio() {
@@ -224,6 +258,34 @@ const API_URL = "https://script.google.com/macros/s/AKfycbyBsARvwUIGlp0zZkOHyJy1
             }
 
             bottone.innerText = "Scopri i punti!";
+        }
+
+        // NUOVA: Funzione per comprare un premio
+        async function compraPremio(costo, nomePremio) {
+            let pin = prompt(`Vuoi sbloccare '${nomePremio}' per ${costo} punti?\nInserisci il tuo PIN per confermare l'acquisto:`);
+            
+            if (!pin) return; // L'utente ha annullato o non ha inserito nulla
+
+            try {
+                alert("Sto verificando i punti e sbloccando il premio... ⏳");
+                
+                let url = API_URL + "?action=redeem&pin=" + pin + "&costo=" + costo;
+                let risposta = await fetch(url);
+                let risultato = await risposta.json();
+                
+                alert(risultato.message);
+                
+                // Se andato a buon fine, aggiorna visivamente i dati
+                if (risultato.success) {
+                    caricaPodio();
+                    // Se l'utente ha la sua scheda punti aperta, aggiorna anche quella
+                    if(document.getElementById("pinInput").value === pin) {
+                        cercaPunti(); 
+                    }
+                }
+            } catch (error) {
+                alert("Errore di connessione. Riprova tra poco.");
+            }
         }
 
         // Avvia il caricamento del podio appena si apre la pagina
